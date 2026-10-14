@@ -15,11 +15,18 @@ public class Player : MonoBehaviour
     [SerializeField] private Image Image_8;
     [SerializeField] private Image Image_9;
     [SerializeField] private Image Image_10;
+    [SerializeField] private Image Image_11;
+    [SerializeField] private Image Image_12;
+    [SerializeField] private Image Image_13;
+    [SerializeField] private Image Image_14;
+    [SerializeField] private Image Image_15;
 
     private int Display;
     private float Timer = 0.0f;
     private int userChoice = 2;
     private string userSelection = "";
+    private int computerChoice = 0;
+    private string computerSelection = "";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,6 +41,11 @@ public class Player : MonoBehaviour
         Image_8.enabled = false;
         Image_9.enabled = false;
         Image_10.enabled = false;
+        Image_11.enabled = false;
+        Image_12.enabled = false;
+        Image_13.enabled = false;
+        Image_14.enabled = false;
+        Image_15.enabled = false;
 
         Display = 1;
     }
@@ -91,7 +103,7 @@ public class Player : MonoBehaviour
                 Image_7.enabled = true;
 
                 Timer += Time.deltaTime;
-                if (Timer >= 2)
+                if (Timer >= 1)
                 {
                     Timer = 0.0f;
                     Display = 5;
@@ -103,7 +115,7 @@ public class Player : MonoBehaviour
                 Image_8.enabled = true;
 
                 Timer += Time.deltaTime;
-                if (Timer >= 2)
+                if (Timer >= 1)
                 {
                     Timer = 0.0f;
                     Display = 6;
@@ -115,7 +127,7 @@ public class Player : MonoBehaviour
                 Image_9.enabled = true;
 
                 Timer += Time.deltaTime;
-                if (Timer >= 2)
+                if (Timer >= 1)
                 {
                     Timer = 0.0f;
                     Display = 7;
@@ -125,6 +137,24 @@ public class Player : MonoBehaviour
             {
                 Image_9.enabled = false;
                 Image_10.enabled = true;
+
+                if (computerChoice == 0)
+                {
+                    computerChoice = Random.Range(1,4);
+
+                    if (computerChoice == 1)
+                    {
+                        computerSelection = "ROCK";
+                    }
+                    else if (computerChoice == 2)
+                    {
+                        computerSelection = "PAPER";
+                    }
+                    else if (computerChoice == 3)
+                    {
+                        computerSelection = "SCISSORS";
+                    }
+                }
 
                 Timer += Time.deltaTime;
                 if (Timer >= 2)
@@ -136,6 +166,158 @@ public class Player : MonoBehaviour
             else if (Display == 8)
             {
                 Image_10.enabled = false;
+
+                if (computerSelection == "ROCK")
+                {
+                    Image_11.enabled = true;
+
+                    Timer += Time.deltaTime;
+                    if (Timer >= 3)
+                    {
+                        Timer = 0.0f;
+                        computerChoice = 0;
+                        Display = 9;
+                    }
+                }
+                else if (computerSelection == "PAPER")
+                {
+                    Image_12.enabled = true;
+
+                    Timer += Time.deltaTime;
+                    if (Timer >= 3)
+                    {
+                        Timer = 0.0f;
+                        computerChoice = 0;
+                        Display = 9;
+                    }
+                }
+                else if (computerSelection == "SCISSORS")
+                {
+                    Image_13.enabled = true;
+                    
+                    Timer += Time.deltaTime;
+                    if (Timer >= 3)
+                    {
+                        Timer = 0.0f;
+                        computerChoice = 0;
+                        Display = 9;
+                    }
+                }
+            }
+            else if (Display == 9)
+            {
+                Image_11.enabled = false;
+                Image_12.enabled = false;
+                Image_13.enabled = false;
+
+                if (userSelection == computerSelection)
+                {
+                    Image_1.enabled = true;
+                    Image_2.enabled = false;
+                    Image_3.enabled = false;
+                    Image_4.enabled = false;
+                    Image_5.enabled = false;
+                    Image_6.enabled = false;
+                    Image_7.enabled = false;
+                    Image_8.enabled = false;
+                    Image_9.enabled = false;
+                    Image_10.enabled = false;
+                    Image_11.enabled = false;
+                    Image_12.enabled = false;
+                    Image_13.enabled = false;
+                    Image_14.enabled = false;
+                    Image_15.enabled = false;
+
+                    Display = 2;
+                    Timer = 0.0f;
+                    userChoice = 2;
+                    userSelection = "";
+                    computerChoice = 0;
+                    computerSelection = "";
+                }
+                else if (userSelection == "ROCK" && computerSelection == "PAPER")
+                {
+                    Image_15.enabled = true;
+
+                    Timer += Time.deltaTime;
+                    if (Timer >= 3)
+                    {
+                        Timer = 0.0f;
+                        userSelection = "";
+                        computerSelection = "";
+                        Display = 10;
+                    }
+                }
+                else if (userSelection == "ROCK" && computerSelection == "SCISSORS")
+                {
+                    Image_14.enabled = true;
+
+                    Timer += Time.deltaTime;
+                    if (Timer >= 3)
+                    {
+                        Timer = 0.0f;
+                        userSelection = "";
+                        computerSelection = "";
+                        Display = 10;
+                    }
+                }
+                else if (userSelection == "PAPER" && computerSelection == "ROCK")
+                {
+                    Image_14.enabled = true;
+
+                    Timer += Time.deltaTime;
+                    if (Timer >= 3)
+                    {
+                        Timer = 0.0f;
+                        userSelection = "";
+                        computerSelection = "";
+                        Display = 10;
+                    }
+                }
+                else if (userSelection == "PAPER" && computerSelection == "SCISSORS")
+                {
+                    Image_15.enabled = true;
+
+                    Timer += Time.deltaTime;
+                    if (Timer >= 3)
+                    {
+                        Timer = 0.0f;
+                        userSelection = "";
+                        computerSelection = "";
+                        Display = 10;
+                    }
+                }
+                else if (userSelection == "SCISSORS" && computerSelection == "ROCK")
+                {
+                    Image_15.enabled = true;
+
+                    Timer += Time.deltaTime;
+                    if (Timer >= 3)
+                    {
+                        Timer = 0.0f;
+                        userSelection = "";
+                        computerSelection = "";
+                        Display = 10;
+                    }
+                }
+                else if (userSelection == "SCISSORS" && computerSelection == "PAPER")
+                {
+                    Image_14.enabled = true;
+
+                    Timer += Time.deltaTime;
+                    if (Timer >= 3)
+                    {
+                        Timer = 0.0f;
+                        userSelection = "";
+                        computerSelection = "";
+                        Display = 10;
+                    }
+                }
+            }
+            else if (Display == 10)
+            {
+                Image_14.enabled = false;
+                Image_15.enabled = false;
             }
         }
         else
@@ -150,6 +332,11 @@ public class Player : MonoBehaviour
             Image_8.enabled = false;
             Image_9.enabled = false;
             Image_10.enabled = false;
+            Image_11.enabled = false;
+            Image_12.enabled = false;
+            Image_13.enabled = false;
+            Image_14.enabled = false;
+            Image_15.enabled = false;
         }
     }
 
@@ -162,17 +349,17 @@ public class Player : MonoBehaviour
                 if (userChoice == 1)
                 {
                     userSelection = "ROCK";
-                    Debug.Log(userSelection);
+                    userChoice = 2;
                 }
                 else if (userChoice == 2)
                 {
                     userSelection = "PAPER";
-                    Debug.Log(userSelection);
+                    userChoice = 2;
                 }
                 else if (userChoice == 3)
                 {
                     userSelection = "SCISSORS";
-                    Debug.Log(userSelection);
+                    userChoice = 2;
                 }
                 
                 Display = 4;
