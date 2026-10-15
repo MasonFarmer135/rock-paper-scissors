@@ -20,10 +20,13 @@ public class Player : MonoBehaviour
     [SerializeField] private Image Image_13;
     [SerializeField] private Image Image_14;
     [SerializeField] private Image Image_15;
+    [SerializeField] private Image Image_16;
+    [SerializeField] private Image Image_17;
+    [SerializeField] private Image Image_18;
 
     private int Display;
     private float Timer = 0.0f;
-    private int userChoice = 2;
+    private int userChoice = 0;
     private string userSelection = "";
     private int computerChoice = 0;
     private string computerSelection = "";
@@ -46,6 +49,9 @@ public class Player : MonoBehaviour
         Image_13.enabled = false;
         Image_14.enabled = false;
         Image_15.enabled = false;
+        Image_16.enabled = false;
+        Image_17.enabled = false;
+        Image_18.enabled = false;
 
         Display = 1;
     }
@@ -157,7 +163,7 @@ public class Player : MonoBehaviour
                 }
 
                 Timer += Time.deltaTime;
-                if (Timer >= 2)
+                if (Timer >= 1.5)
                 {
                     Timer = 0.0f;
                     Display = 8;
@@ -227,10 +233,13 @@ public class Player : MonoBehaviour
                     Image_13.enabled = false;
                     Image_14.enabled = false;
                     Image_15.enabled = false;
+                    Image_16.enabled = false;
+                    Image_17.enabled = false;
+                    Image_18.enabled = false;
 
                     Display = 2;
                     Timer = 0.0f;
-                    userChoice = 2;
+                    userChoice = 0;
                     userSelection = "";
                     computerChoice = 0;
                     computerSelection = "";
@@ -318,25 +327,55 @@ public class Player : MonoBehaviour
             {
                 Image_14.enabled = false;
                 Image_15.enabled = false;
+                Image_16.enabled = true;
+            }
+            else if (Display == 11)
+            {
+                Image_16.enabled = false;
+
+                if (userChoice == 1)
+                {
+                    Image_17.enabled = false;
+                    Image_18.enabled = true;
+                }
+                else if (userChoice == 2)
+                {
+                    Image_17.enabled = true;
+                    Image_18.enabled = false;
+                }
+
+            }
+            else if (Display == 12)
+            {
+                Image_17.enabled = false;
+                Image_18.enabled = true;
+                
+                Application.Quit();
             }
         }
         else
         {
-            Image_1.enabled = true;
-            Image_2.enabled = false;
-            Image_3.enabled = false;
-            Image_4.enabled = false;
-            Image_5.enabled = false;
-            Image_6.enabled = false;
-            Image_7.enabled = false;
-            Image_8.enabled = false;
-            Image_9.enabled = false;
-            Image_10.enabled = false;
-            Image_11.enabled = false;
-            Image_12.enabled = false;
-            Image_13.enabled = false;
-            Image_14.enabled = false;
-            Image_15.enabled = false;
+            if (Display != 12)
+            {
+                Image_1.enabled = true;
+                Image_2.enabled = false;
+                Image_3.enabled = false;
+                Image_4.enabled = false;
+                Image_5.enabled = false;
+                Image_6.enabled = false;
+                Image_7.enabled = false;
+                Image_8.enabled = false;
+                Image_9.enabled = false;
+                Image_10.enabled = false;
+                Image_11.enabled = false;
+                Image_12.enabled = false;
+                Image_13.enabled = false;
+                Image_14.enabled = false;
+                Image_15.enabled = false;
+                Image_16.enabled = false;
+                Image_17.enabled = false;
+                Image_18.enabled = false;
+            }
         }
     }
 
@@ -349,20 +388,55 @@ public class Player : MonoBehaviour
                 if (userChoice == 1)
                 {
                     userSelection = "ROCK";
-                    userChoice = 2;
+                    userChoice = 0;
                 }
                 else if (userChoice == 2)
                 {
                     userSelection = "PAPER";
-                    userChoice = 2;
+                    userChoice = 0;
                 }
                 else if (userChoice == 3)
                 {
                     userSelection = "SCISSORS";
-                    userChoice = 2;
+                    userChoice = 0;
                 }
                 
                 Display = 4;
+            }
+            else if (Display == 11)
+            {
+                if (userChoice == 1)
+                {
+                    Display = 12;
+                }
+                else if (userChoice == 2)
+                {
+                    Image_1.enabled = true;
+                    Image_2.enabled = false;
+                    Image_3.enabled = false;
+                    Image_4.enabled = false;
+                    Image_5.enabled = false;
+                    Image_6.enabled = false;
+                    Image_7.enabled = false;
+                    Image_8.enabled = false;
+                    Image_9.enabled = false;
+                    Image_10.enabled = false;
+                    Image_11.enabled = false;
+                    Image_12.enabled = false;
+                    Image_13.enabled = false;
+                    Image_14.enabled = false;
+                    Image_15.enabled = false;
+                    Image_16.enabled = false;
+                    Image_17.enabled = false;
+                    Image_18.enabled = false;
+
+                    Display = 2;
+                    Timer = 0.0f;
+                    userChoice = 0;
+                    userSelection = "";
+                    computerChoice = 0;
+                    computerSelection = "";
+                }
             }
         }
     }
@@ -371,7 +445,22 @@ public class Player : MonoBehaviour
     {
         if (context.started == true)
         {
-            Debug.Log("Up!");
+            if (Display == 10)
+            {
+                Display = 11;
+                userChoice = 2;
+            }
+            else if (Display == 11)
+            {
+                if (userChoice < 2)
+                {
+                    userChoice = userChoice + 1;
+                }
+                else
+                {
+                    userChoice = 1;
+                }
+            }
         }
     }
 
@@ -379,7 +468,22 @@ public class Player : MonoBehaviour
     {
         if (context.started == true)
         {
-            Debug.Log("Down!");
+            if (Display == 10)
+            {
+                Display = 11;
+                userChoice = 1;
+            }
+            else if (Display == 11)
+            {
+                if (userChoice > 1)
+                {
+                    userChoice = userChoice - 1;
+                }
+                else
+                {
+                    userChoice = 2;
+                }
+            }
         }
     }
 
@@ -390,7 +494,7 @@ public class Player : MonoBehaviour
             if (Display == 2)
             {
                 Display = 3;
-                userChoice = userChoice - 1;
+                userChoice = 1;
             }
             else if (Display == 3)
             {
@@ -413,7 +517,7 @@ public class Player : MonoBehaviour
             if (Display == 2)
             {
                 Display = 3;
-                userChoice = userChoice + 1;
+                userChoice = 2;
             }
             else if (Display == 3)
             {
