@@ -24,6 +24,13 @@ public class Player : MonoBehaviour
     [SerializeField] private Image Image_17;
     [SerializeField] private Image Image_18;
 
+    [SerializeField] private AudioSource SoundEffects;
+    [SerializeField] private AudioClip Draw;
+    [SerializeField] private AudioClip Lose;
+    [SerializeField] private AudioClip Navigation;
+    [SerializeField] private AudioClip Selection;
+    [SerializeField] private AudioClip Win;
+
     private int Display;
     private float Timer = 0.0f;
     private int userChoice = 0;
@@ -218,6 +225,8 @@ public class Player : MonoBehaviour
 
                 if (userSelection == computerSelection)
                 {
+                    SoundEffects.PlayOneShot(Draw);
+
                     Image_1.enabled = true;
                     Image_2.enabled = false;
                     Image_3.enabled = false;
@@ -248,78 +257,126 @@ public class Player : MonoBehaviour
                 {
                     Image_15.enabled = true;
 
-                    Timer += Time.deltaTime;
-                    if (Timer >= 3)
+                    if (Timer == 0)
+                    {
+                        SoundEffects.PlayOneShot(Lose);
+                        Timer += Time.deltaTime;
+                    }
+                    else if (Timer >= 3)
                     {
                         Timer = 0.0f;
                         userSelection = "";
                         computerSelection = "";
                         Display = 10;
+                    }
+                    else
+                    {
+                        Timer += Time.deltaTime;
                     }
                 }
                 else if (userSelection == "ROCK" && computerSelection == "SCISSORS")
                 {
                     Image_14.enabled = true;
 
-                    Timer += Time.deltaTime;
-                    if (Timer >= 3)
+                    if (Timer == 0)
+                    {
+                        SoundEffects.PlayOneShot(Win);
+                        Timer += Time.deltaTime;
+                    }
+                    else if (Timer >= 3)
                     {
                         Timer = 0.0f;
                         userSelection = "";
                         computerSelection = "";
                         Display = 10;
+                    }
+                    else
+                    {
+                        Timer += Time.deltaTime;
                     }
                 }
                 else if (userSelection == "PAPER" && computerSelection == "ROCK")
                 {
                     Image_14.enabled = true;
 
-                    Timer += Time.deltaTime;
-                    if (Timer >= 3)
+                    if (Timer == 0)
+                    {
+                        SoundEffects.PlayOneShot(Win);
+                        Timer += Time.deltaTime;
+                    }
+                    else if (Timer >= 3)
                     {
                         Timer = 0.0f;
                         userSelection = "";
                         computerSelection = "";
                         Display = 10;
+                    }
+                    else
+                    {
+                        Timer += Time.deltaTime;
                     }
                 }
                 else if (userSelection == "PAPER" && computerSelection == "SCISSORS")
                 {
                     Image_15.enabled = true;
 
-                    Timer += Time.deltaTime;
-                    if (Timer >= 3)
+                    if (Timer == 0)
+                    {
+                        SoundEffects.PlayOneShot(Lose);
+                        Timer += Time.deltaTime;
+                    }
+                    else if (Timer >= 3)
                     {
                         Timer = 0.0f;
                         userSelection = "";
                         computerSelection = "";
                         Display = 10;
+                    }
+                    else
+                    {
+                        Timer += Time.deltaTime;
                     }
                 }
                 else if (userSelection == "SCISSORS" && computerSelection == "ROCK")
                 {
                     Image_15.enabled = true;
 
-                    Timer += Time.deltaTime;
-                    if (Timer >= 3)
+                    if (Timer == 0)
+                    {
+                        SoundEffects.PlayOneShot(Lose);
+                        Timer += Time.deltaTime;
+                    }
+                    else if (Timer >= 3)
                     {
                         Timer = 0.0f;
                         userSelection = "";
                         computerSelection = "";
                         Display = 10;
                     }
+                    else
+                    {
+                        Timer += Time.deltaTime;
+                    }
                 }
                 else if (userSelection == "SCISSORS" && computerSelection == "PAPER")
                 {
                     Image_14.enabled = true;
 
-                    Timer += Time.deltaTime;
-                    if (Timer >= 3)
+                    if (Timer == 0)
+                    {
+                        SoundEffects.PlayOneShot(Win);
+                        Timer += Time.deltaTime;
+                    }
+                    else if (Timer >= 3)
                     {
                         Timer = 0.0f;
                         userSelection = "";
                         computerSelection = "";
                         Display = 10;
+                    }
+                    else
+                    {
+                        Timer += Time.deltaTime;
                     }
                 }
             }
@@ -385,6 +442,8 @@ public class Player : MonoBehaviour
         {
             if (Display == 3)
             {
+                SoundEffects.PlayOneShot(Selection);
+
                 if (userChoice == 1)
                 {
                     userSelection = "ROCK";
@@ -405,6 +464,8 @@ public class Player : MonoBehaviour
             }
             else if (Display == 11)
             {
+                SoundEffects.PlayOneShot(Selection);
+                
                 if (userChoice == 1)
                 {
                     Display = 12;
@@ -447,11 +508,15 @@ public class Player : MonoBehaviour
         {
             if (Display == 10)
             {
+                SoundEffects.PlayOneShot(Navigation);
+
                 Display = 11;
                 userChoice = 2;
             }
             else if (Display == 11)
             {
+                SoundEffects.PlayOneShot(Navigation);
+
                 if (userChoice < 2)
                 {
                     userChoice = userChoice + 1;
@@ -470,11 +535,15 @@ public class Player : MonoBehaviour
         {
             if (Display == 10)
             {
+                SoundEffects.PlayOneShot(Navigation);
+            
                 Display = 11;
                 userChoice = 1;
             }
             else if (Display == 11)
             {
+                SoundEffects.PlayOneShot(Navigation);
+
                 if (userChoice > 1)
                 {
                     userChoice = userChoice - 1;
@@ -493,11 +562,15 @@ public class Player : MonoBehaviour
         {
             if (Display == 2)
             {
+                SoundEffects.PlayOneShot(Navigation);
+
                 Display = 3;
                 userChoice = 1;
             }
             else if (Display == 3)
             {
+                SoundEffects.PlayOneShot(Navigation);
+
                 if (userChoice > 1)
                 {
                     userChoice = userChoice - 1;
@@ -516,11 +589,15 @@ public class Player : MonoBehaviour
         {
             if (Display == 2)
             {
+                SoundEffects.PlayOneShot(Navigation);
+
                 Display = 3;
                 userChoice = 2;
             }
             else if (Display == 3)
             {
+                SoundEffects.PlayOneShot(Navigation);
+
                 if (userChoice < 3)
                 {
                     userChoice = userChoice + 1;
